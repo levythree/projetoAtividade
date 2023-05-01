@@ -2,6 +2,7 @@ package Main;
 
 import java.util.Scanner;
 
+import Conexoes.SelecaoDeAtividades;
 import Excecoes.ValorInvalidoException;
 
 public class Menu {
@@ -39,7 +40,7 @@ public class Menu {
                 ---------------------------------------- 
                 """);
 
-                    AtividadesCadastradas.listarAtividades();
+                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE");
                 }
 
                 else if (opcao == 3) {

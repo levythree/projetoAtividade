@@ -2,14 +2,18 @@ package Main;
 
 import java.util.Scanner;
 import java.util.Date;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import Atividades.Atividade;
-import Atividades.AtividadeDeLazer;
-import Atividades.AtividadeDeTrabalho;
-import Atividades.AtividadeFisica;
-import Excecoes.ValorInvalidoException;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import Atividades.*;
+import Excecoes.*;
+import Conexoes.*;
 
 public class CadastroDeAtividade {
     public static void cadastrarAtividade() {
@@ -29,10 +33,10 @@ public class CadastroDeAtividade {
 
             System.out.printf("Escolha uma opção: ");
 
-            try {
+            try (Connection conexao = GeradorDeConexoes.gerarConexao()) {
                 int opcao = Integer.parseInt(input.nextLine());
                 ValorInvalidoException.validarOpcao(opcao, 6);
-                
+
                 if (opcao == 4) {
                     break;
                 }
@@ -56,6 +60,8 @@ public class CadastroDeAtividade {
                         Atividade atividadeDeLazer = new AtividadeDeLazer(descricao,dataDeRealizacao, duracao, satisfacao);
                         
                         Atividade.getListaDeAtividades().add(atividadeDeLazer);
+
+                        InsercaoDeDados.inserir(atividadeDeLazer);
                     }
 
                     else if (opcao == 2) {
@@ -66,6 +72,8 @@ public class CadastroDeAtividade {
                         Atividade atividadeDeTrabalho = new AtividadeDeTrabalho(descricao,dataDeRealizacao, duracao, satisfacao, dificuldade);
                     
                         Atividade.getListaDeAtividades().add(atividadeDeTrabalho);
+
+                        InsercaoDeDados.inserir(atividadeDeTrabalho);
                     }
                 
                     else if (opcao == 3) {
@@ -76,8 +84,14 @@ public class CadastroDeAtividade {
                         Atividade atividadeFisica = new AtividadeFisica(descricao,dataDeRealizacao, duracao, satisfacao, intensidade);
                     
                         Atividade.getListaDeAtividades().add(atividadeFisica);
+
+                        InsercaoDeDados.inserir(atividadeFisica);
                     }
                 }
+            }
+
+            catch (SQLException erro) {
+                System.out.printf("----------------------------------------%n%s%n", erro);
             }
 
             catch (ValorInvalidoException erro) {

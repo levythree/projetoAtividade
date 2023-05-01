@@ -8,11 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
-import Atividades.Atividade;
-import Atividades.AtividadeDeLazer;
-import Atividades.AtividadeDeTrabalho;
-import Atividades.AtividadeFisica;
-import Excecoes.ValorInvalidoException;
+import Atividades.*;
+import Excecoes.*;
+import Conexoes.*;
 
 public class PesquisaDeAtividade {
     public static void pesquisarAtividade() {
@@ -90,6 +88,19 @@ public class PesquisaDeAtividade {
 
                 System.out.printf("----------------------------------------%n");
 
+                if (opcao == 1) {
+                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE_DE_LAZER");
+                }
+
+                else if (opcao == 2) {
+                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE_DE_TRABALHO");
+                }
+
+                else if (opcao == 3) {
+                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE_FISICA");
+                }
+
+                /*
                 for (Atividade atividade : Atividade.getListaDeAtividades()) {
                     if (opcao == 1 && atividade instanceof AtividadeDeLazer) {
                         atividade.listar();
@@ -103,6 +114,7 @@ public class PesquisaDeAtividade {
                         atividade.listar();
                     }
                 }
+                */
             }
 
             catch (NumberFormatException erro) {
