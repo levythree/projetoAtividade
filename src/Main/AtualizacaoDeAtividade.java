@@ -9,6 +9,8 @@ import Atividades.Atividade;
 import Atividades.AtividadeDeLazer;
 import Atividades.AtividadeDeTrabalho;
 import Atividades.AtividadeFisica;
+import Conexoes.ContagemDeAtividades;
+import Conexoes.SelecaoDeAtividades;
 import Excecoes.ValorInvalidoException;
 
 public class AtualizacaoDeAtividade {
@@ -22,15 +24,15 @@ public class AtualizacaoDeAtividade {
             ----------------------------------------
             """);
 
-            AtividadesCadastradas.listarAtividades();
+            SelecaoDeAtividades.selecionarAtividades("ATIVIDADE");
 
-            System.out.printf("[%s] - Voltar%n----------------------------------------%nEscolha uma opção: ", Atividade.getListaDeAtividades().size() + 1);
+            System.out.printf("[%s] - Voltar%n----------------------------------------%nEscolha uma opção: ", ContagemDeAtividades.getQuantidadeDeAtividades() + 1);
 
             try {
                 int opcao = Integer.parseInt(input.nextLine()) - 1;
-                ValorInvalidoException.validarOpcao(opcao + 1, Atividade.getListaDeAtividades().size() + 1);
+                ValorInvalidoException.validarOpcao(opcao + 1, ContagemDeAtividades.getQuantidadeDeAtividades() + 1);
 
-                if (opcao + 1 == Atividade.getListaDeAtividades().size() + 1) {
+                if (opcao + 1 == ContagemDeAtividades.getQuantidadeDeAtividades() + 1) {
                     break;
                 }
     

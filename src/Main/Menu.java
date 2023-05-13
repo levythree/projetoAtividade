@@ -2,11 +2,14 @@ package Main;
 
 import java.util.Scanner;
 
+import Atividades.Atividade;
 import Conexoes.SelecaoDeAtividades;
 import Excecoes.ValorInvalidoException;
 
 public class Menu {
     public static void menu() {
+        System.out.println(Atividade.getListaDeAtividades());
+
         while (true) {
             Scanner input = new Scanner(System.in);
 
@@ -52,7 +55,7 @@ public class Menu {
                 }
 
                 else if (opcao == 5) {
-                    RemocaoDeAtividade.removerAtividade();
+                    RemocaoMenu.remocaoMenu();
                 }
 
                 else if (opcao == 6) {

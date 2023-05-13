@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import Atividades.*;
 
-public class InsercaoDeDados {
+public abstract class InsercaoDeDados {
     public static void inserir(Atividade atividade) {
         try {
             Connection conexao = GeradorDeConexoes.gerarConexao();
@@ -16,7 +16,7 @@ public class InsercaoDeDados {
                 VALUES (?, ?, ?, ?, ?, ?, ?)   
             """);
 
-            statement.setInt(1, ContagemDeAtividades.getQuantidadeDeAtividades() + 1);
+            statement.setInt(1, atividade.getId());
             statement.setString(2, atividade.getDescricao());
             statement.setDate(3, new java.sql.Date(atividade.getDataDeRealizacao().getTime()));
             statement.setInt(4, atividade.getDuracao());
@@ -32,7 +32,7 @@ public class InsercaoDeDados {
                     VALUES (?)        
                 """);
 
-                lazer.setInt(1, ContagemDeAtividades.getQuantidadeDeAtividades());
+                lazer.setInt(1, atividade.getId());
 
                 lazer.execute();
             }
@@ -43,7 +43,7 @@ public class InsercaoDeDados {
                     VALUES (?, ?)
                 """);
 
-                trabalho.setInt(1, ContagemDeAtividades.getQuantidadeDeAtividades());
+                trabalho.setInt(1, atividade.getId());
                 trabalho.setInt(2, ((AtividadeDeTrabalho) atividade).getDificuldade());
 
                 trabalho.execute();
@@ -55,7 +55,7 @@ public class InsercaoDeDados {
                     VALUES (?, ?)        
                 """);
 
-                fisica.setInt(1, ContagemDeAtividades.getQuantidadeDeAtividades());
+                fisica.setInt(1, atividade.getId());
                 fisica.setInt(2, ((AtividadeFisica) atividade).getIntensidade());
 
                 fisica.execute();

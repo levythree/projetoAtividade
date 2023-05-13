@@ -54,7 +54,7 @@ public class SelecaoDeAtividades {
                 }
 
                 while (rsAtividade.next()) {
-                    System.out.printf("ID: %s | ", rsAtividade.getInt("ID"));
+                    System.out.printf("[%s] - ", rsAtividade.getInt("ID"));
                     System.out.printf("Descrição: %s | ", rsAtividade.getString("DESCRICAO"));
                     System.out.printf("Data de realização: %s | ", simpleDateFormat.format(rsAtividade.getDate("DATA_DE_REALIZACAO")));
                     System.out.printf("Duração: %s | ", rsAtividade.getInt("DURACAO"));

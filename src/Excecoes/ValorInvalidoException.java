@@ -12,7 +12,7 @@ public class ValorInvalidoException extends Exception {
     }
 
     public static void validarDuracao(int duracao) throws ValorInvalidoException {
-        if (duracao <= 1) {
+        if (duracao < 1) {
             throw new ValorInvalidoException("Informe uma duração válida para a atividade (em minutos).");
         }
     }
