@@ -1,14 +1,22 @@
 package Atividades;
 
+import AtividadesDAO.*;
+
 import java.util.Date;
 import Excecoes.ValorInvalidoException;
 
+import java.sql.SQLException;
+
 public class AtividadeDeTrabalho extends Atividade {
+    AtividadeDeTrabalhoDao dao = new AtividadeDeTrabalhoDao();
+
     private int dificuldade;
 
-    public AtividadeDeTrabalho(String descricao, Date dataDeRealizacao, int duracao, int satisfacao, int dificuldade) {
+    public AtividadeDeTrabalho(String descricao, Date dataDeRealizacao, int duracao, int satisfacao, int dificuldade) throws SQLException {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
         setDificuldade(dificuldade);
+
+        dao.inserir(this);
     }
 
     public void setDificuldade(int dificuldade) {

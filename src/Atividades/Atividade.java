@@ -1,16 +1,17 @@
 package Atividades;
 
 import java.util.List;
-
-import Conexoes.ContagemDeAtividades;
-
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
-import Excecoes.ValorInvalidoException;
+import AtividadesDAO.*;
+import Excecoes.*;
 
 public abstract class Atividade implements Comparable<Atividade> {
+    AtividadeDao dao = new AtividadeDao();
+
     private static List<Atividade> listaDeAtividades = new ArrayList<Atividade>();
 
     private int id;
@@ -22,7 +23,7 @@ public abstract class Atividade implements Comparable<Atividade> {
     private double bemEstar;
 
     public Atividade(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) {
-        setId(ContagemDeAtividades.getQuantidadeDeAtividades() + 1);
+        setId(dao.getQuantidadeDeAtividades() + 1);
         setDescricao(descricao);
         setDataDeRealizacao(dataDeRealizacao);
         setSatisfacao(satisfacao);

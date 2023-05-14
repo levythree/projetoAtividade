@@ -1,10 +1,18 @@
 package Atividades;
 
+import AtividadesDAO.*;
+
 import java.util.Date;
 
+import java.sql.SQLException;
+
 public class AtividadeDeLazer extends Atividade {
-    public AtividadeDeLazer(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) {
+    AtividadeDeLazerDao dao = new AtividadeDeLazerDao();
+
+    public AtividadeDeLazer(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) throws SQLException {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
+
+        dao.inserir(this);
     }
 
     @Override

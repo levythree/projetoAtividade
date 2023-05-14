@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import AtividadesDAO.*;
 import Atividades.*;
 import Excecoes.*;
 import Conexoes.*;
@@ -60,8 +61,6 @@ public class CadastroDeAtividade {
                         Atividade atividadeDeLazer = new AtividadeDeLazer(descricao,dataDeRealizacao, duracao, satisfacao);
                         
                         Atividade.getListaDeAtividades().add(atividadeDeLazer);
-
-                        InsercaoDeDados.inserir(atividadeDeLazer);
                     }
 
                     else if (opcao == 2) {
@@ -72,8 +71,6 @@ public class CadastroDeAtividade {
                         Atividade atividadeDeTrabalho = new AtividadeDeTrabalho(descricao,dataDeRealizacao, duracao, satisfacao, dificuldade);
                     
                         Atividade.getListaDeAtividades().add(atividadeDeTrabalho);
-
-                        InsercaoDeDados.inserir(atividadeDeTrabalho);
                     }
                 
                     else if (opcao == 3) {
@@ -84,8 +81,6 @@ public class CadastroDeAtividade {
                         Atividade atividadeFisica = new AtividadeFisica(descricao,dataDeRealizacao, duracao, satisfacao, intensidade);
                     
                         Atividade.getListaDeAtividades().add(atividadeFisica);
-
-                        InsercaoDeDados.inserir(atividadeFisica);
                     }
                 }
             }
