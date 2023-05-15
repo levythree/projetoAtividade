@@ -11,30 +11,9 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 public class AtividadeDeTrabalhoDao extends AtividadeDao {
-    public List<Atividade> atividadesDeTrabalho = new ArrayList<Atividade>();
+    private List<Atividade> atividadesDeTrabalho = new ArrayList<Atividade>();
 
-    @Override
-    public void inserir(Atividade atividade) throws SQLException {
-        super.inserir(atividade);
-
-        Connection conexao = gerarConexao();
-
-        PreparedStatement stmt = conexao.prepareStatement("""
-            INSERT INTO ATIVIDADE_DE_TRABALHO
-            VALUES (?, ?)
-        """);
-
-        stmt.setInt(1, atividade.getId());
-        stmt.setInt(2, ((AtividadeDeTrabalho) atividade).getDificuldade());
-
-        stmt.execute();
-
-        stmt.close();
-        conexao.close();
-    }
-
-    @Override
-    public List<Atividade> getAtividades() {
+    public void init() {
         try {
             Connection conexao = gerarConexao();
 
@@ -61,12 +40,37 @@ public class AtividadeDeTrabalhoDao extends AtividadeDao {
             rs.close();
             stmt.close();
             conexao.close();
-    
-            return atividadesDeTrabalho;
         }
         
         catch (SQLException erro) {
-            return atividadesDeTrabalho;
+
         }
+    }
+
+    @Override
+    public List<Atividade> getAtividades() {
+        return atividadesDeTrabalho;
+    }
+
+    @Override
+    public void inserir(Atividade atividade) throws SQLException {
+        super.inserir(atividade);
+
+        Connection conexao = gerarConexao();
+
+        PreparedStatement stmt = conexao.prepareStatement("""
+            INSERT INTO ATIVIDADE_DE_TRABALHO
+            VALUES (?, ?)
+        """);
+
+        atividadesDeTrabalho.add(atividade);
+
+        stmt.setInt(1, atividade.getId());
+        stmt.setInt(2, ((AtividadeDeTrabalho) atividade).getDificuldade());
+
+        stmt.execute();
+
+        stmt.close();
+        conexao.close();
     }
 }

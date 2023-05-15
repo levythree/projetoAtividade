@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import Atividades.*;
 import Excecoes.*;
-import Conexoes.*;
 
 public class PesquisaDeAtividade {
     public static void pesquisarAtividade() {
@@ -88,33 +87,19 @@ public class PesquisaDeAtividade {
 
                 System.out.printf("----------------------------------------%n");
 
-                if (opcao == 1) {
-                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE_DE_LAZER");
-                }
-
-                else if (opcao == 2) {
-                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE_DE_TRABALHO");
-                }
-
-                else if (opcao == 3) {
-                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE_FISICA");
-                }
-
-                /*
-                for (Atividade atividade : Atividade.getListaDeAtividades()) {
-                    if (opcao == 1 && atividade instanceof AtividadeDeLazer) {
-                        atividade.listar();
+                for (Atividade a : Menu.dao.getAtividades()) {
+                    if (opcao == 1 && a instanceof AtividadeDeLazer) {
+                        a.listar();
                     }
 
-                    else if (opcao == 2 && atividade instanceof AtividadeDeTrabalho) {
-                        atividade.listar();
+                    else if (opcao == 2 && a instanceof AtividadeDeTrabalho) {
+                        a.listar();
                     }
 
-                    else if (opcao == 3 && atividade instanceof AtividadeFisica) {
-                        atividade.listar();
+                    else if (opcao == 3 && a instanceof AtividadeFisica) {
+                        a.listar();
                     }
                 }
-                */
             }
 
             catch (NumberFormatException erro) {
@@ -148,7 +133,7 @@ public class PesquisaDeAtividade {
 
             System.out.printf("----------------------------------------%n");
 
-            for (Atividade atividade : Atividade.getListaDeAtividades()) {
+            for (Atividade atividade : Menu.dao.getAtividades()) {
                 if (atividade.getDataDeRealizacao().compareTo(dataInicial) >= 0 &&
                 atividade.getDataDeRealizacao().compareTo(dataFinal) <= 0) {
                     atividade.listar();
@@ -166,7 +151,7 @@ public class PesquisaDeAtividade {
     }
 
     public static void listarAtividadesComMaiorGasto() {
-        List<Atividade> listaDeAtividadesCopia = new ArrayList<Atividade>(Atividade.getListaDeAtividades());
+        List<Atividade> listaDeAtividadesCopia = new ArrayList<Atividade>(Menu.dao.getAtividades());
 
         Collections.sort(listaDeAtividadesCopia, Collections.reverseOrder());
 

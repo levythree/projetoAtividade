@@ -3,8 +3,6 @@ package Main;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import Conexoes.*;
-import AtividadesDAO.*;
 import Excecoes.ValorInvalidoException;
 
 public class RemocaoMenu {

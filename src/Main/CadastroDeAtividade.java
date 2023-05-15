@@ -8,20 +8,12 @@ import java.text.SimpleDateFormat;
 
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
-import AtividadesDAO.*;
 import Atividades.*;
 import Excecoes.*;
-import Conexoes.*;
 
 public class CadastroDeAtividade {
     public static void cadastrarAtividade() {
-        AtividadeDeLazerDao aldao = new AtividadeDeLazerDao();
-        AtividadeDeTrabalhoDao atdao = new AtividadeDeTrabalhoDao();
-        AtividadeFisicaDao afdao = new AtividadeFisicaDao();
-
         while (true) {
             Scanner input = new Scanner(System.in);
 
@@ -38,7 +30,7 @@ public class CadastroDeAtividade {
 
             System.out.printf("Escolha uma opção: ");
 
-            try (Connection conexao = GeradorDeConexoes.gerarConexao()) {
+            try (Connection conexao = Menu.dao.gerarConexao()) {
                 int opcao = Integer.parseInt(input.nextLine());
                 ValorInvalidoException.validarOpcao(opcao, 6);
 
@@ -63,10 +55,9 @@ public class CadastroDeAtividade {
 
                     if (opcao == 1) {
                         Atividade atividadeDeLazer = new AtividadeDeLazer(descricao,dataDeRealizacao, duracao, satisfacao);
-                        
-                        Menu.dao.getAtividades().add(atividadeDeLazer);
 
-                        aldao.inserir(atividadeDeLazer);
+                        Menu.aldao.inserir(atividadeDeLazer);
+                        Menu.dao.getAtividades().add(atividadeDeLazer);
                     }
 
                     else if (opcao == 2) {
@@ -75,10 +66,9 @@ public class CadastroDeAtividade {
                         ValorInvalidoException.validarDificuldade(dificuldade);
                     
                         Atividade atividadeDeTrabalho = new AtividadeDeTrabalho(descricao,dataDeRealizacao, duracao, satisfacao, dificuldade);
-                    
-                        Menu.dao.getAtividades().add(atividadeDeTrabalho);
 
-                        atdao.inserir(atividadeDeTrabalho);
+                        Menu.atdao.inserir(atividadeDeTrabalho);
+                        Menu.dao.getAtividades().add(atividadeDeTrabalho);
                     }
                 
                     else if (opcao == 3) {
@@ -87,10 +77,9 @@ public class CadastroDeAtividade {
                         ValorInvalidoException.validarIntensidade(intensidade);
 
                         Atividade atividadeFisica = new AtividadeFisica(descricao,dataDeRealizacao, duracao, satisfacao, intensidade);
-                    
-                        Menu.dao.getAtividades().add(atividadeFisica);
                         
-                        afdao.inserir(atividadeFisica);
+                        Menu.afdao.inserir(atividadeFisica);
+                        Menu.dao.getAtividades().add(atividadeFisica);
                     }
                 }
             }

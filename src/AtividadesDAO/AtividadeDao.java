@@ -3,17 +3,14 @@ package AtividadesDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.text.SimpleDateFormat;
-
 import Atividades.*;
 
 public class AtividadeDao {
-    List<Atividade> atividades = new ArrayList<Atividade>();
+    private List<Atividade> atividades = new ArrayList<Atividade>();
 
     public Connection gerarConexao() {
         try {
@@ -31,11 +28,7 @@ public class AtividadeDao {
         }
     }
 
-    public void init() {
-        AtividadeDeLazerDao aldao = new AtividadeDeLazerDao();
-        AtividadeDeTrabalhoDao atdao = new AtividadeDeTrabalhoDao();
-        AtividadeFisicaDao afdao = new AtividadeFisicaDao();
-
+    public void init(AtividadeDeLazerDao aldao, AtividadeDeTrabalhoDao atdao, AtividadeFisicaDao afdao) {
         for (Atividade a : aldao.getAtividades()) {
             atividades.add(a);
         }
@@ -119,5 +112,8 @@ public class AtividadeDao {
         stmt.setInt(1, id);
 
         stmt.execute();
+
+        stmt.close();
+        conexao.close();
     }
 }

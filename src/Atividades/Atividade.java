@@ -3,10 +3,8 @@ package Atividades;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
-import AtividadesDAO.*;
 import Main.*;
 import Excecoes.*;
 

@@ -11,29 +11,9 @@ import java.sql.ResultSet;
 import Atividades.*;
 
 public class AtividadeDeLazerDao extends AtividadeDao {
-    public List<Atividade> atividadesDeLazer = new ArrayList<Atividade>();
+    private List<Atividade> atividadesDeLazer = new ArrayList<Atividade>();
 
-    @Override
-    public void inserir(Atividade atividade) throws SQLException {
-        super.inserir(atividade);
-
-        Connection conexao = gerarConexao();
-
-        PreparedStatement stmt = conexao.prepareStatement("""
-            INSERT INTO ATIVIDADE_DE_LAZER
-            VALUES (?)
-        """);
-
-        stmt.setInt(1, atividade.getId());
-
-        stmt.execute();
-
-        stmt.close();
-        conexao.close();
-    }
-
-    @Override
-    public List<Atividade> getAtividades() {
+    public void init() {
         try {
             Connection conexao = gerarConexao();
 
@@ -58,13 +38,37 @@ public class AtividadeDeLazerDao extends AtividadeDao {
     
             rs.close();
             stmt.close();
-            conexao.close();
-    
-            return atividadesDeLazer;    
+            conexao.close();  
         }
         
         catch (SQLException erro) {
-            return atividadesDeLazer;
+            ;
         }
+    }
+
+    @Override
+    public List<Atividade> getAtividades() {
+        return atividadesDeLazer;
+    }
+
+    @Override
+    public void inserir(Atividade atividade) throws SQLException {
+        super.inserir(atividade);
+
+        Connection conexao = gerarConexao();
+
+        PreparedStatement stmt = conexao.prepareStatement("""
+            INSERT INTO ATIVIDADE_DE_LAZER
+            VALUES (?)
+        """);
+
+        atividadesDeLazer.add(atividade);
+
+        stmt.setInt(1, atividade.getId());
+
+        stmt.execute();
+
+        stmt.close();
+        conexao.close();
     }
 }

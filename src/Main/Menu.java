@@ -1,20 +1,22 @@
 package Main;
 
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import Atividades.Atividade;
 import AtividadesDAO.*;
-import Conexoes.SelecaoDeAtividades;
 import Excecoes.ValorInvalidoException;
 
 public class Menu {
     public static AtividadeDao dao = new AtividadeDao();
+    public static AtividadeDeLazerDao aldao = new AtividadeDeLazerDao();
+    public static AtividadeDeTrabalhoDao atdao = new AtividadeDeTrabalhoDao();
+    public static AtividadeFisicaDao afdao = new AtividadeFisicaDao();
 
     public static void menu() {
-        dao.init();
+        aldao.init();
+        atdao.init();
+        afdao.init();
+
+        dao.init(aldao, atdao, afdao);
 
         while (true) {
             Scanner input = new Scanner(System.in);

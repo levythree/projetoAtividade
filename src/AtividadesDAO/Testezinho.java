@@ -8,26 +8,23 @@ public class Testezinho {
     public static void main(String[] args) throws SQLException {
         AtividadeDao dao = new AtividadeDao();
 
-        dao.init();
-
         AtividadeDeLazerDao aldao = new AtividadeDeLazerDao();
         AtividadeDeTrabalhoDao atdao = new AtividadeDeTrabalhoDao();
         AtividadeFisicaDao afdao = new AtividadeFisicaDao();
 
-        for (Atividade a : dao.getAtividades()) {
-            a.listar();
-        }
+        aldao.init();
+        atdao.init();
+        afdao.init();
 
-        for (Atividade a : aldao.getAtividades()) {
-            a.listar();
-        }
+        dao.init(aldao, atdao, afdao);
 
-        for (Atividade a : atdao.getAtividades()) {
-            a.listar();
-        }
+        dao.listarAtividades();
+        aldao.listarAtividades();
+        atdao.listarAtividades();
+        afdao.listarAtividades();
 
-        for (Atividade a : afdao.getAtividades()) {
-            a.listar();
-        }
+        dao.inserir(new AtividadeDeLazer("TESTE", new java.util.Date(), 60, 1));
+
+        dao.listarAtividades();
     }
 }
