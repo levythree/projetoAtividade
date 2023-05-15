@@ -78,8 +78,23 @@ public class AtividadeDao {
         conexao.close();
     }
 
-    public void atualizar(int id, String[] parametros) throws SQLException {
-        
+    public void atualizar(String[] args) throws SQLException {
+        Connection conexao = gerarConexao();
+
+        String sql = """
+            UPDATE %s
+            SET %s = %s
+            WHERE ID = %s        
+        """;
+
+        sql = String.format(sql, args[0], args[1], args[2], args[3]);
+
+        PreparedStatement stmt = conexao.prepareStatement(sql);
+
+        stmt.execute();
+
+        stmt.close();
+        conexao.close();
     }
 
     public void deletar(int id) throws SQLException {

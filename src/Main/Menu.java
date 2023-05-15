@@ -59,7 +59,7 @@ public class Menu {
                 }
 
                 else if (opcao == 4) {
-                    // AtualizacaoDeAtividade.atualizarAtividadeMenu();
+                    AtualizacaoDeAtividade.atualizarAtividadeMenu();
                 }
 
                 else if (opcao == 5) {
