@@ -18,6 +18,10 @@ import Conexoes.*;
 
 public class CadastroDeAtividade {
     public static void cadastrarAtividade() {
+        AtividadeDeLazerDao aldao = new AtividadeDeLazerDao();
+        AtividadeDeTrabalhoDao atdao = new AtividadeDeTrabalhoDao();
+        AtividadeFisicaDao afdao = new AtividadeFisicaDao();
+
         while (true) {
             Scanner input = new Scanner(System.in);
 
@@ -60,7 +64,9 @@ public class CadastroDeAtividade {
                     if (opcao == 1) {
                         Atividade atividadeDeLazer = new AtividadeDeLazer(descricao,dataDeRealizacao, duracao, satisfacao);
                         
-                        Atividade.getListaDeAtividades().add(atividadeDeLazer);
+                        Menu.dao.getAtividades().add(atividadeDeLazer);
+
+                        aldao.inserir(atividadeDeLazer);
                     }
 
                     else if (opcao == 2) {
@@ -70,7 +76,9 @@ public class CadastroDeAtividade {
                     
                         Atividade atividadeDeTrabalho = new AtividadeDeTrabalho(descricao,dataDeRealizacao, duracao, satisfacao, dificuldade);
                     
-                        Atividade.getListaDeAtividades().add(atividadeDeTrabalho);
+                        Menu.dao.getAtividades().add(atividadeDeTrabalho);
+
+                        atdao.inserir(atividadeDeTrabalho);
                     }
                 
                     else if (opcao == 3) {
@@ -80,7 +88,9 @@ public class CadastroDeAtividade {
 
                         Atividade atividadeFisica = new AtividadeFisica(descricao,dataDeRealizacao, duracao, satisfacao, intensidade);
                     
-                        Atividade.getListaDeAtividades().add(atividadeFisica);
+                        Menu.dao.getAtividades().add(atividadeFisica);
+                        
+                        afdao.inserir(atividadeFisica);
                     }
                 }
             }

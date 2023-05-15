@@ -9,8 +9,6 @@ import Excecoes.ValorInvalidoException;
 
 public class RemocaoMenu {
     public static void remocaoMenu() {
-        AtividadeDao dao = new AtividadeDao();
-
         while (true) {
             Scanner input = new Scanner(System.in);
 
@@ -20,22 +18,22 @@ public class RemocaoMenu {
             ---------------------------------------- 
             """);
 
-            SelecaoDeAtividades.selecionarAtividades("ATIVIDADE");
+            Menu.dao.listarAtividades();
 
-            System.out.printf("[%s] - Voltar%n", dao.getQuantidadeDeAtividades() + 1);
+            System.out.printf("[%s] - Voltar%n", Menu.dao.getAtividades().size() + 1);
 
             System.out.printf("----------------------------------------%nEscolha uma opção: ");
 
             try {
                 int opcao = Integer.parseInt(input.nextLine());
-                ValorInvalidoException.validarOpcao(opcao, dao.getQuantidadeDeAtividades() + 1);
+                ValorInvalidoException.validarOpcao(opcao, Menu.dao.getAtividades().size() + 1);
 
-                if (opcao == dao.getQuantidadeDeAtividades() + 1) {
+                if (opcao == Menu.dao.getAtividades().size() + 1) {
                     break;
                 }
     
                 else {
-                    dao.deletar(opcao);
+                    Menu.dao.deletar(opcao);
                 }
             }
 

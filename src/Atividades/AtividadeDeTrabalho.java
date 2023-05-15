@@ -15,8 +15,6 @@ public class AtividadeDeTrabalho extends Atividade {
     public AtividadeDeTrabalho(String descricao, Date dataDeRealizacao, int duracao, int satisfacao, int dificuldade) throws SQLException {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
         setDificuldade(dificuldade);
-
-        dao.inserir(this);
     }
 
     public void setDificuldade(int dificuldade) {

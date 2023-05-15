@@ -5,13 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import java.util.List;
+
 import java.text.SimpleDateFormat;
 
 import Atividades.*;
 
 public class AtividadeDao {
+    List<Atividade> atividades = new ArrayList<Atividade>();
+
     public Connection gerarConexao() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,24 +31,35 @@ public class AtividadeDao {
         }
     }
 
-    public int getQuantidadeDeAtividades() {
-        Connection conexao = gerarConexao();
-        
-        try {
-            PreparedStatement stmt = conexao.prepareStatement("""
-                SELECT COUNT(*)
-                FROM ATIVIDADE
-            """);
+    public void init() {
+        AtividadeDeLazerDao aldao = new AtividadeDeLazerDao();
+        AtividadeDeTrabalhoDao atdao = new AtividadeDeTrabalhoDao();
+        AtividadeFisicaDao afdao = new AtividadeFisicaDao();
 
-            ResultSet rs = stmt.executeQuery();
-
-            rs.next();
-
-            return rs.getInt("COUNT(*)");
+        for (Atividade a : aldao.getAtividades()) {
+            atividades.add(a);
         }
-        
-        catch (SQLException erro) {
-            throw new RuntimeException(erro);
+
+        for (Atividade a : atdao.getAtividades()) {
+            atividades.add(a);
+        }
+
+        for (Atividade a : afdao.getAtividades()) {
+            atividades.add(a);
+        }
+
+        atividades.sort((a1, a2) -> {
+            return Integer.valueOf(a1.getId()).compareTo(Integer.valueOf(a2.getId()));
+        });
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
+    }
+
+    public void listarAtividades() {
+        for (Atividade a : atividades) {
+            a.listar();
         }
     }
 
@@ -71,46 +85,13 @@ public class AtividadeDao {
         conexao.close();
     }
 
-    public void listar() throws SQLException {
-        Connection conexao = gerarConexao();
-
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-
-        PreparedStatement stmt = conexao.prepareStatement("""
-            SELECT *
-            FROM ATIVIDADE
-        """);
-
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            System.out.printf("[%s] - ", rs.getInt("ID"));
-            System.out.printf("Descrição: %s | ", rs.getString("DESCRICAO"));
-            System.out.printf("Data de realização: %s | ", formatador.format(rs.getDate("DATA_DE_REALIZACAO")));
-            System.out.printf("Duração: %s | ", rs.getInt("DURACAO"));
-            System.out.printf("Satisfação: %s | ", rs.getInt("SATISFACAO"));
-        }
-    }
-
-    public void listarGastoDeEnergiaEBemEstar() throws SQLException {
-        Connection conexao = gerarConexao();
-
-        PreparedStatement stmt = conexao.prepareStatement("""
-            SELECT GASTO_DE_ENERGIA, BEM_ESTAR
-            FROM ATIVIDADE      
-        """);
-
-        ResultSet rs = stmt.executeQuery();
+    public void atualizar(int id, String[] parametros) throws SQLException {
         
-        System.out.printf("Gasto de energia: %s | ", rs.getInt("GASTO_DE_ENERGIA"));
-        System.out.printf("Bem-estar: %.2f%n", rs.getDouble("BEM_ESTAR"));
-    }
-
-    public void atualizar(Atividade atividade, String[] parametros) throws SQLException {
-
     }
 
     public void deletar(int id) throws SQLException {
+        atividades.remove(id - 1);
+
         Connection conexao = gerarConexao();
 
         PreparedStatement stmt = conexao.prepareStatement("""
@@ -122,6 +103,12 @@ public class AtividadeDao {
         stmt.setInt(1, id);
 
         stmt.execute();
+
+        for (Atividade a : atividades) {
+            if (a.getId() > id) {
+                a.setId(a.getId() - 1);
+            }
+        }
 
         stmt = conexao.prepareStatement("""
             UPDATE ATIVIDADE

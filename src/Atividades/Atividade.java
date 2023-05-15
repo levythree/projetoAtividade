@@ -7,11 +7,10 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import AtividadesDAO.*;
+import Main.*;
 import Excecoes.*;
 
 public abstract class Atividade implements Comparable<Atividade> {
-    AtividadeDao dao = new AtividadeDao();
-
     private static List<Atividade> listaDeAtividades = new ArrayList<Atividade>();
 
     private int id;
@@ -23,7 +22,7 @@ public abstract class Atividade implements Comparable<Atividade> {
     private double bemEstar;
 
     public Atividade(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) {
-        setId(dao.getQuantidadeDeAtividades() + 1);
+        setId(Menu.dao.getAtividades().size() + 1);
         setDescricao(descricao);
         setDataDeRealizacao(dataDeRealizacao);
         setSatisfacao(satisfacao);
@@ -119,6 +118,7 @@ public abstract class Atividade implements Comparable<Atividade> {
     public void listar() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+        System.out.printf("[%s] - ", getId());
         System.out.printf("Descrição: %s | ", getDescricao());
         System.out.printf("Data de realização: %s | ", simpleDateFormat.format(dataDeRealizacao));
         System.out.printf("Duração: %s | ", getDuracao());

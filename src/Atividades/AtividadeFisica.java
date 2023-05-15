@@ -15,8 +15,6 @@ public class AtividadeFisica extends Atividade {
     public AtividadeFisica(String descricao, Date dataDeRealizacao, int duracao, int satisfacao, int intensidade) throws SQLException {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
         setIntensidade(intensidade);
-
-        dao.inserir(this);
     }
 
     public void setIntensidade(int intensidade) {

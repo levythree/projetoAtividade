@@ -1,14 +1,20 @@
 package Main;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Atividades.Atividade;
+import AtividadesDAO.*;
 import Conexoes.SelecaoDeAtividades;
 import Excecoes.ValorInvalidoException;
 
 public class Menu {
+    public static AtividadeDao dao = new AtividadeDao();
+
     public static void menu() {
-        System.out.println(Atividade.getListaDeAtividades());
+        dao.init();
 
         while (true) {
             Scanner input = new Scanner(System.in);
@@ -43,7 +49,7 @@ public class Menu {
                 ---------------------------------------- 
                 """);
 
-                    SelecaoDeAtividades.selecionarAtividades("ATIVIDADE");
+                    dao.listarAtividades();
                 }
 
                 else if (opcao == 3) {

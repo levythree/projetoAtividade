@@ -11,8 +11,6 @@ public class AtividadeDeLazer extends Atividade {
 
     public AtividadeDeLazer(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) throws SQLException {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
-
-        dao.inserir(this);
     }
 
     @Override
