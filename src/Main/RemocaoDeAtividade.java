@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 import Excecoes.ValorInvalidoException;
 
-public class RemocaoMenu {
-    public static void remocaoMenu() {
+public class RemocaoDeAtividade {
+    public static void removerAtividade() {
         while (true) {
             Scanner input = new Scanner(System.in);
 
@@ -31,7 +31,7 @@ public class RemocaoMenu {
                 }
     
                 else {
-                    Menu.dao.deletar(opcao);
+                    Menu.dao.deletar(Menu.dao.getAtividades().get(opcao - 1));
                 }
             }
 

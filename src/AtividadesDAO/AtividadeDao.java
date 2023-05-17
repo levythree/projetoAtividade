@@ -3,9 +3,11 @@ package AtividadesDAO;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import java.sql.SQLException;
 
 import Atividades.*;
 
@@ -109,8 +111,8 @@ public class AtividadeDao {
         atualizar(atividade, bemEstar);
     }
 
-    public void deletar(int id) throws SQLException {
-        atividades.remove(id - 1);
+    public void deletar(Atividade atividade) throws SQLException {
+        atividades.remove(atividade.getId() - 1);
 
         Connection conexao = gerarConexao();
 
@@ -120,12 +122,12 @@ public class AtividadeDao {
             WHERE ID = ?
         """);
 
-        stmt.setInt(1, id);
+        stmt.setInt(1, atividade.getId());
 
         stmt.execute();
 
         for (Atividade a : atividades) {
-            if (a.getId() > id) {
+            if (a.getId() > atividade.getId()) {
                 a.setId(a.getId() - 1);
             }
         }
@@ -136,7 +138,7 @@ public class AtividadeDao {
             WHERE ID > ?
         """);
 
-        stmt.setInt(1, id);
+        stmt.setInt(1, atividade.getId());
 
         stmt.execute();
 

@@ -1,0 +1,13 @@
+Integrantes da equipe: Levy Abreu, Isaac Ãngelo, Letícia Karine e Niaclara Gleyce
+
+Erro "No operations allowed after connection closed": https://stackoverflow.com/questions/45252205/no-operations-allowed-after-connection-closed-mysql
+Ordenação da lista de atividades com base no ID utilizando expressão lambda: https://www.techiedelight.com/pt/sort-list-multiple-attributes-java/
+
+Pergunta 1: conseguiu ou não realizar tudo o que foi proposto? Se não conseguiu, detalhe o que faltou.
+R.: Conseguimos.
+
+Pergunta 2: Quais os possíveis problemas que se identifica no código?
+R.: O tratamento de exceções poderia ter sido feito de um jeito mais elaborado, a listagem das atividades do banco de dados poderia ter sido feita sem a utilização de ArrayList e a classe AtividadeDao ainda não está tão genérica quanto gostaríamos.
+
+Pergunta 3: Sentiu dificuldade para desenvolver o projeto? Quais?
+R.: Sim, principalmente na listagem e na atualização de dados no banco. Foi um processo demorado até perceber que era possível utilizar formatação de String nos comandos SQL, o que tornou possível o método pra atualizar atividades do jeito que nós fizemos.

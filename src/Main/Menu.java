@@ -63,7 +63,7 @@ public class Menu {
                 }
 
                 else if (opcao == 5) {
-                    RemocaoMenu.remocaoMenu();
+                    RemocaoDeAtividade.removerAtividade();
                 }
 
                 else if (opcao == 6) {

@@ -1,15 +1,9 @@
 package Atividades;
 
-import AtividadesDAO.*;
-
 import java.util.Date;
 
-import java.sql.SQLException;
-
 public class AtividadeDeLazer extends Atividade {
-    AtividadeDeLazerDao dao = new AtividadeDeLazerDao();
-
-    public AtividadeDeLazer(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) throws SQLException {
+    public AtividadeDeLazer(String descricao, Date dataDeRealizacao, int duracao, int satisfacao) {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
     }
 

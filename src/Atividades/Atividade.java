@@ -1,7 +1,5 @@
 package Atividades;
 
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -9,8 +7,6 @@ import Main.*;
 import Excecoes.*;
 
 public abstract class Atividade implements Comparable<Atividade> {
-    private static List<Atividade> listaDeAtividades = new ArrayList<Atividade>();
-
     private int id;
     private String descricao;
     private Date dataDeRealizacao;
@@ -107,10 +103,6 @@ public abstract class Atividade implements Comparable<Atividade> {
 
     public void calcularBemEstar() {
         setBemEstar((getGastoDeEnergia() * getSatisfacao()) / 360.0);
-    }
-
-    public static List<Atividade> getListaDeAtividades() {
-        return listaDeAtividades;
     }
 
     public void listar() {

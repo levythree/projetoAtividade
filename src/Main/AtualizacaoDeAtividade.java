@@ -2,15 +2,13 @@ package Main;
 
 import java.util.Scanner;
 import java.util.Date;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import Atividades.Atividade;
-import Atividades.AtividadeDeLazer;
-import Atividades.AtividadeDeTrabalho;
-import Atividades.AtividadeFisica;
-import Excecoes.ValorInvalidoException;
+import java.sql.SQLException;
+import java.text.ParseException;
+
+import Atividades.*;
+import Excecoes.*;
 
 public class AtualizacaoDeAtividade {
     public static void atualizarAtividadeMenu() {

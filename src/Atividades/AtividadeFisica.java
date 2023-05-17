@@ -1,18 +1,13 @@
 package Atividades;
 
-import AtividadesDAO.*;
-
-import Excecoes.ValorInvalidoException;
 import java.util.Date;
 
-import java.sql.SQLException;
+import Excecoes.*;
 
 public class AtividadeFisica extends Atividade {
-    AtividadeFisicaDao dao = new AtividadeFisicaDao();
-
     private int intensidade;
 
-    public AtividadeFisica(String descricao, Date dataDeRealizacao, int duracao, int satisfacao, int intensidade) throws SQLException {
+    public AtividadeFisica(String descricao, Date dataDeRealizacao, int duracao, int satisfacao, int intensidade) {
         super(descricao, dataDeRealizacao, duracao, satisfacao);
         setIntensidade(intensidade);
     }

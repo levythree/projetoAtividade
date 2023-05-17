@@ -2,11 +2,11 @@ package Main;
 
 import java.util.Scanner;
 import java.util.Date;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import java.text.ParseException;
 import java.sql.SQLException;
+
 import java.sql.Connection;
 
 import Atividades.*;
@@ -30,7 +30,7 @@ public class CadastroDeAtividade {
 
             System.out.printf("Escolha uma opção: ");
 
-            try (Connection conexao = Menu.dao.gerarConexao()) {
+            try {
                 int opcao = Integer.parseInt(input.nextLine());
                 ValorInvalidoException.validarOpcao(opcao, 6);
 

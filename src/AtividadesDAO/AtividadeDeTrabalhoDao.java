@@ -43,7 +43,7 @@ public class AtividadeDeTrabalhoDao extends AtividadeDao {
         }
         
         catch (SQLException erro) {
-
+            throw new RuntimeException(erro);
         }
     }
 
