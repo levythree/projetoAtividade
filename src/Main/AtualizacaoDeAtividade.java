@@ -51,9 +51,8 @@ public class AtualizacaoDeAtividade {
     }
 
     public static void atualizarAtividade(int opcao) {
-        String[] args = new String[4];
+        String[] args = new String[3];
         args[0] = "ATIVIDADE";
-        args[3] = String.valueOf(opcao + 1);
 
         while (true) {
             Scanner input = new Scanner(System.in);
@@ -161,7 +160,7 @@ public class AtualizacaoDeAtividade {
                     args[2] = String.valueOf(intensidade);
                 }
                 
-                Menu.dao.atualizar(args);
+                Menu.dao.atualizar(Menu.dao.getAtividades().get(opcao), args);
             }
 
             catch (NumberFormatException erro) {

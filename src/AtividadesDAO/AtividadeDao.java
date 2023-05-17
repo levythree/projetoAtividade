@@ -78,16 +78,16 @@ public class AtividadeDao {
         conexao.close();
     }
 
-    public void atualizar(String[] args) throws SQLException {
+    public void atualizar(Atividade atividade, String[] args) throws SQLException {
         Connection conexao = gerarConexao();
 
         String sql = """
             UPDATE %s
             SET %s = %s
-            WHERE ID = %s        
+            WHERE ID = %s
         """;
 
-        sql = String.format(sql, args[0], args[1], args[2], args[3]);
+        sql = String.format(sql, args[0], args[1], args[2], String.valueOf(atividade.getId()));
 
         PreparedStatement stmt = conexao.prepareStatement(sql);
 
@@ -95,6 +95,18 @@ public class AtividadeDao {
 
         stmt.close();
         conexao.close();
+
+        if (args[1] == "DURACAO" || args[1] == "SATISFACAO" || args[1] == "DIFICULDADE" || args[1] == "INTENSIDADE") {
+            atualizarGastoDeEnergiaEBemEstar(atividade);
+        }
+    }
+
+    public void atualizarGastoDeEnergiaEBemEstar(Atividade atividade) throws SQLException {
+        String[] gastoDeEnergia = {"ATIVIDADE", "GASTO_DE_ENERGIA", String.valueOf(atividade.getGastoDeEnergia()), String.valueOf(atividade.getId())};
+        String[] bemEstar = {"ATIVIDADE", "BEM_ESTAR", String.valueOf(atividade.getBemEstar()), String.valueOf(atividade.getId())};
+
+        atualizar(atividade, gastoDeEnergia);
+        atualizar(atividade, bemEstar);
     }
 
     public void deletar(int id) throws SQLException {
